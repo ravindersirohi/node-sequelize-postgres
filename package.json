@@ -1,0 +1,29 @@
+{
+  "name": "node-sequelize-postgres",
+  "version": "1.0.0",
+  "description": "Node express api using Sequelize and Postgres SQL.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravindersirohi/node-sequelize-postgres.git"
+  },
+  "keywords": [
+    "Sequelize",
+    "Postgres",
+    "expressJs"
+  ],
+  "author": "Ravinder Sirohi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ravindersirohi/node-sequelize-postgres/issues"
+  },
+  "homepage": "https://github.com/ravindersirohi/node-sequelize-postgres#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.2.0",
+    "sequelize": "^5.21.9"
+  }
+}
