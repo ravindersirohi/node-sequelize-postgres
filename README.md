@@ -3,5 +3,5 @@ NodeJS API using ExpressJS, Sequelize (V5) ORM and Postgres database
 
 # Sequelize (V5) ORM
 
-https://sequelize.org/
+https://sequelize.org/ <br/>
 https://sequelize.org/v5/
