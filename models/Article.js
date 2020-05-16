@@ -1,7 +1,13 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
 
-const articles = db.define('articles', {
+const article = db.define('Article', {
+    id: {
+        field: 'articleId',
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
     title: {
         type: Sequelize.STRING,
         allowNull: false
@@ -10,5 +16,7 @@ const articles = db.define('articles', {
         type: Sequelize.TEXT,
         allowNull: true
     }
-})
-module.exports = { articles };
+});
+
+module.exports = article;
+
