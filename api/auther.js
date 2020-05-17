@@ -31,5 +31,16 @@ routes.post('/', (request, response) => {
         .then(author => { return response.status(201).json(author) })
         .catch(err => { return response.status(400).send(err) });
 });
+routes.put('/', (request, response) => {
+    console.log(request.body);
+    const { id, firstName, lastName, email } = request.body;
+    Author.update({ firstName, lastName, email }, {
+        where: {
+            id: id
+        }
+    })
+        .then(author => { return response.status(202).send('Successfully updated') })
+        .catch(err => { return response.status(400).send(err) });
+});
 
 module.exports = routes;
