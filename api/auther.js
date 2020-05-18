@@ -21,26 +21,33 @@ routes.get('/', (request, response) => {
         .catch(err => { return response.status(404).send(err) });
 });
 routes.post('/', (request, response) => {
-    console.log(request.body);
     const { firstName, lastName, email } = request.body;
-    Author.create({
-        firstName,
-        lastName,
-        email
-    })
+    Author.create({ firstName, lastName, email })
         .then(author => { return response.status(201).json(author) })
         .catch(err => { return response.status(400).send(err) });
 });
 routes.put('/', (request, response) => {
-    console.log(request.body);
     const { id, firstName, lastName, email } = request.body;
     Author.update({ firstName, lastName, email }, {
         where: {
             id: id
         }
     })
-        .then(author => { return response.status(202).send('Successfully updated') })
+        .then(author => { return response.status(202).send('Successfully deleted') })
         .catch(err => { return response.status(400).send(err) });
+});
+
+routes.delete('/:id', (request, response) => {
+    const { id } = request.params;
+    Author.findByPk(id)
+        .then(author => {
+            if (author)
+                return author.destroy();
+            else
+                return Promise.reject();
+        })
+        .then(() => response.status(204).send())
+        .catch(err => response.status(404).send(err));
 });
 
 module.exports = routes;
