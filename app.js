@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const db = require('./config/db');
 const author = require('./api/auther');
+const article = require('./api/article');
 require('./models/relationship');
 
 const bodyParser = require('body-parser');
@@ -15,6 +16,7 @@ app.use(function (req, res, next) {
 
 //Routes
 app.use('/api/author', author);
+app.use('/api/article', article);
 
 
 // Database Sync

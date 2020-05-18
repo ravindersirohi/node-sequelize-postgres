@@ -1,6 +1,6 @@
 const express = require('express');
 const routes = express.Router();
-const Author = require('../models/Author');
+const Article = require('../models/Article');
 const Sequelize = require('sequelize');
 const { Op } = Sequelize;
 
@@ -10,39 +10,42 @@ routes.get('/', (request, response) => {
     if (q) {
         filter = {
             where: {
-                firstName: {
-                    [Op.like]: `${q}`
+                title: {
+                    [Op.like]: `%${q}%`
                 }
             }
         }
     }
-    Author.findAll(filter)
-        .then((authors) => { return response.status(200).json(authors) })
+    Article.findAll(filter)
+        .then((articles) => { return response.status(200).json(articles) })
         .catch(err => { return response.status(404).send(err) });
 });
+
 routes.post('/', (request, response) => {
-    const { firstName, lastName, email } = request.body;
-    Author.create({ firstName, lastName, email })
-        .then(author => { return response.status(201).json(author) })
+    const { title, body, authorId } = request.body;
+    Article.create({ title, body, authorId })
+        .then(article => { return response.status(201).json(article) })
         .catch(err => { return response.status(400).send(err) });
 });
+
 routes.put('/', (request, response) => {
-    const { id, firstName, lastName, email } = request.body;
-    Author.update({ firstName, lastName, email }, {
+    const { id, title, body, email } = request.body;
+    Article.update({ title, body }, {
         where: {
             id: id
         }
     })
-        .then(author => { return response.status(202).send('Successfully updated!') })
-        .catch(err => { return response.status(400).send(err) });
+        .then(article => { return response.status(202).send('Article successfully updated!') })
+        .catch(err => { return response.status(404).send(err) });
 });
 
 routes.delete('/:id', (request, response) => {
     const { id } = request.params;
-    Author.findByPk(id)
-        .then(author => {
-            if (author)
-                return author.destroy();
+    Article.findByPk(id)
+        .then(article => {
+            console.log(article);
+            if (article)
+                return article.destroy();
             else
                 return Promise.reject();
         })
