@@ -43,7 +43,6 @@ routes.delete('/:id', (request, response) => {
     const { id } = request.params;
     Article.findByPk(id)
         .then(article => {
-            console.log(article);
             if (article)
                 return article.destroy();
             else
